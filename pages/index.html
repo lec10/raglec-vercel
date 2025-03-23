@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAGLEC - Sistema de Consulta de Documentos</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>RAGLEC</h1>
+            <p>Sistema de Recuperación Aumentada de Generación para consulta de documentos</p>
+        </header>
+        
+        <main>
+            <div class="query-section">
+                <h2>Realiza tu consulta</h2>
+                <textarea id="query-input" placeholder="Escribe tu pregunta aquí..."></textarea>
+                <button id="send-button">Consultar</button>
+                <div id="loading" class="hidden">Procesando consulta...</div>
+            </div>
+            
+            <div class="response-section">
+                <h2>Respuesta</h2>
+                <div id="response-content"></div>
+                
+                <div class="sources-section">
+                    <h3>Fuentes</h3>
+                    <div id="sources-content"></div>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>Powered by RAGLEC &copy; 2024</p>
+        </footer>
+    </div>
+    
+    <script src="/js/main.js"></script>
+</body>
+</html> 
