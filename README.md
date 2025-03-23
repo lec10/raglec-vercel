@@ -11,10 +11,10 @@ raglec-vercel/
 │   └── requirements.txt   # Dependencias Python
 ├── app/                   # Código principal de la aplicación
 │   ├── config/            # Configuración
-│   ├── database/          # Conexión a Supabase
-│   ├── document_processing/# Procesamiento de documentos
+│   ├── database/          # Conexión a Supabase y búsquedas vectoriales
+│   ├── document_processing/# Generación de embeddings
 │   ├── query/             # Motor de consultas RAG
-│   └── utils/             # Utilidades
+│   └── utils/             # Métricas de rendimiento
 ├── public/                # Archivos estáticos
 │   ├── css/               # Estilos CSS
 │   └── js/                # JavaScript
@@ -77,12 +77,20 @@ vercel --prod
    vercel dev
    ```
 
+## Características
+
+Esta versión web de RAGLEC proporciona:
+- Una interfaz web simple para realizar consultas
+- Recuperación semántica de documentos usando embeddings
+- Generación de respuestas basadas en el contexto recuperado
+- Visualización de fuentes utilizadas para la respuesta
+
 ## Limitaciones
 
 - La versión web de RAGLEC solo proporciona la funcionalidad de consulta.
-- El monitoreo de Google Drive y el procesamiento de documentos no están incluidos en esta versión.
+- Esta implementación no incluye capacidades para procesar o cargar nuevos documentos.
 - El tiempo máximo de ejecución está limitado por Vercel (10s en plan gratuito, 60s en planes pagos).
 
 ## Relacionado
 
-Este proyecto es una adaptación del sistema RAGLEC original para funcionar como una aplicación web en Vercel. 
+Este proyecto es una adaptación simplificada del sistema RAGLEC original para funcionar como una aplicación web en Vercel. 

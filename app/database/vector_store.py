@@ -4,10 +4,7 @@ Este módulo proporciona funciones para gestionar documentos y embeddings en la 
 """
 
 import logging
-import json
-import uuid
 from typing import List, Dict, Any, Optional, Tuple
-from datetime import datetime
 
 from langchain.schema import Document
 
@@ -81,33 +78,4 @@ class VectorDatabase:
             
         except Exception as e:
             logger.error(f"Error al realizar búsqueda por similitud: {e}")
-            raise
-    
-    def save_query(self, query: str, response: str) -> bool:
-        """Guarda una consulta y su respuesta en la base de datos.
-        
-        Args:
-            query: Texto de la consulta.
-            response: Respuesta generada.
-            
-        Returns:
-            bool: True si se guardó correctamente, False en caso contrario.
-        """
-        try:
-            query_id = str(uuid.uuid4())
-            
-            # Preparar los datos
-            query_data = {
-                "id": query_id,
-                "query": query,
-                "response": response,
-                "created_at": datetime.now().isoformat()
-            }
-            
-            # Insertar en la tabla de consultas
-            self.supabase.table("queries").insert(query_data).execute()
-            
-            return True
-        except Exception as e:
-            logger.error(f"Error al guardar la consulta: {e}")
-            return False 
+            raise 

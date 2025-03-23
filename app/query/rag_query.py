@@ -144,12 +144,6 @@ class RAGQuerySystem:
                     logger.error(f"Error al generar respuesta con el LLM: {e}")
                     raise ValueError(f"Error al generar respuesta: {str(e)}")
             
-            # Guardar la consulta en la base de datos
-            try:
-                self.vector_db.save_query(query_text, answer)
-            except Exception as e:
-                logger.warning(f"Error al guardar la consulta: {e}")
-            
             # Preparar el resultado
             result = {
                 "answer": answer,
