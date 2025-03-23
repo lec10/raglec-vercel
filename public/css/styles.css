@@ -139,6 +139,7 @@ button:hover {
     margin-bottom: 25px;
     border-radius: 0 5px 5px 0;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    text-align: left;
 }
 
 .answer-container p {
@@ -162,6 +163,7 @@ button:hover {
     display: flex;
     align-items: center;
     gap: 8px;
+    text-align: left;
 }
 
 .sources-section h3 i {
@@ -222,6 +224,7 @@ button:hover {
     padding: 3px 8px;
     border-radius: 4px;
     font-size: 0.8rem;
+    white-space: nowrap;
 }
 
 .source-content {
@@ -229,11 +232,12 @@ button:hover {
     line-height: 1.5;
     color: #333;
     margin-top: 8px;
-    white-space: pre-line;
+    white-space: normal;
     background-color: #fff;
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #eaeaea;
+    text-align: left;
 }
 
 .info-message {

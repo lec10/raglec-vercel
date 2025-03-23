@@ -103,6 +103,21 @@ document.addEventListener('DOMContentLoaded', function() {
                     const sourceItem = document.createElement('div');
                     sourceItem.className = 'source-item';
                     
+                    // Formatear el contenido de la fuente para eliminar espacios innecesarios y saltos de línea
+                    let formattedContent = '';
+                    if (source.content) {
+                        formattedContent = source.content
+                            .substring(0, 300) 
+                            .trim()
+                            .replace(/\s+/g, ' ');
+                            
+                        if (source.content.length > 300) {
+                            formattedContent += '...';
+                        }
+                    } else {
+                        formattedContent = 'Sin contenido';
+                    }
+                    
                     sourceItem.innerHTML = `
                         <div class="source-header">
                             <h4>Fuente ${index + 1}${similarity ? ` <span class="similarity">(${similarity}% similitud)</span>` : ''}</h4>
@@ -112,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             </div>
                         </div>
                         <div class="source-content">
-                            ${source.content ? source.content.substring(0, 300) + (source.content.length > 300 ? '...' : '') : 'Sin contenido'}
+                            ${formattedContent}
                         </div>
                     `;
                     sourcesList.appendChild(sourceItem);
