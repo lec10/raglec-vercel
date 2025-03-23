@@ -5,6 +5,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const sourcesContent = document.getElementById('sources-content');
     const loadingIndicator = document.getElementById('loading');
     
+    // Asegurar que el indicador de carga esté oculto inicialmente
+    loadingIndicator.classList.add('hidden');
+    
     // Función para enviar la consulta
     async function sendQuery() {
         const query = queryInput.value.trim();
