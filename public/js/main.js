@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
         sourcesContent.innerHTML = '';
         
         try {
-            const response = await fetch('/api/query.py', {
+            const response = await fetch('/api/query', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -28,7 +28,25 @@ document.addEventListener('DOMContentLoaded', function() {
                 body: JSON.stringify({ query })
             });
             
-            const data = await response.json();
+            // Capturar el texto de la respuesta para depuración
+            const responseText = await response.text();
+            let data;
+            
+            try {
+                // Intentar parsear como JSON
+                data = JSON.parse(responseText);
+            } catch (parseError) {
+                // Si no es JSON válido, mostrar el texto recibido
+                responseContent.innerHTML = `
+                    <p class="error">Error: La respuesta no es JSON válido</p>
+                    <details>
+                        <summary>Detalles de la respuesta</summary>
+                        <pre>${responseText.substring(0, 500)}${responseText.length > 500 ? '...' : ''}</pre>
+                    </details>
+                `;
+                loadingIndicator.classList.add('hidden');
+                return;
+            }
             
             if (!response.ok) {
                 // Si hay un error en la respuesta, mostrar detalles completos

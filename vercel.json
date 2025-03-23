@@ -10,11 +10,5 @@
     { "src": "/api/(.*)", "dest": "/api/$1" },
     { "src": "/(css|js)/(.*)", "dest": "/public/$1/$2" },
     { "src": "/(.*)", "dest": "/pages/index.html" }
-  ],
-  "env": {
-    "OPENAI_API_KEY": "YOUR_OPENAI_API_KEY",
-    "SUPABASE_URL": "YOUR_SUPABASE_URL",
-    "SUPABASE_KEY": "YOUR_SUPABASE_KEY",
-    "SUPABASE_COLLECTION_NAME": "documents"
-  }
+  ]
 } 
