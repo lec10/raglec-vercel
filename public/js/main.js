@@ -78,23 +78,48 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             // Mostrar respuesta exitosa
-            responseContent.innerHTML = `<p>${data.answer || data.response || 'No se obtuvo respuesta'}</p>`;
+            // Convertir los saltos de línea en <br> y aplicar formato para los párrafos
+            const formattedAnswer = data.answer || data.response || 'No se obtuvo respuesta';
+            const paragraphs = formattedAnswer.split('\n\n').filter(p => p.trim());
             
-            // Mostrar fuentes
+            const answerHtml = `
+                <div class="answer-container">
+                    ${paragraphs.map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('')}
+                </div>
+            `;
+            
+            responseContent.innerHTML = answerHtml;
+            
+            // Mostrar fuentes con mejor formato
             if (data.sources && data.sources.length > 0) {
-                const sourcesList = document.createElement('ul');
-                data.sources.forEach(source => {
-                    const sourceItem = document.createElement('li');
+                const sourcesList = document.createElement('div');
+                sourcesList.className = 'sources-list';
+                
+                data.sources.forEach((source, index) => {
+                    const similarity = source.similarity ? Math.round(source.similarity * 100) : null;
+                    const sourceItem = document.createElement('div');
+                    sourceItem.className = 'source-item';
+                    
                     sourceItem.innerHTML = `
-                        <strong>${source.metadata?.filename || 'Documento'}</strong>
-                        ${source.metadata?.chunk_index ? ` (Fragmento ${source.metadata.chunk_index})` : ''}
-                        <p>${source.content ? source.content.substring(0, 200) + (source.content.length > 200 ? '...' : '') : 'Sin contenido'}</p>
+                        <div class="source-header">
+                            <h4>Fuente ${index + 1}${similarity ? ` <span class="similarity">(${similarity}% similitud)</span>` : ''}</h4>
+                            <div class="source-meta">
+                                ${source.metadata?.filename ? `<span class="filename">${source.metadata.filename}</span>` : ''}
+                                ${source.metadata?.chunk_index ? `<span class="chunk">Fragmento ${source.metadata.chunk_index}</span>` : ''}
+                            </div>
+                        </div>
+                        <div class="source-content">
+                            ${source.content ? source.content.substring(0, 300) + (source.content.length > 300 ? '...' : '') : 'Sin contenido'}
+                        </div>
                     `;
                     sourcesList.appendChild(sourceItem);
                 });
+                
+                // Limpiar el contenido existente y agregar el nuevo
+                sourcesContent.innerHTML = '<h3>Fuentes consultadas</h3>';
                 sourcesContent.appendChild(sourcesList);
             } else {
-                sourcesContent.innerHTML = '<p>No hay fuentes disponibles</p>';
+                sourcesContent.innerHTML = '<p class="info-message">No hay fuentes disponibles para esta consulta</p>';
             }
         } catch (error) {
             // Error al realizar la petición

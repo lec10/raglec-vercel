@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RAGLEC - Sistema de Consulta de Documentos</title>
+    <title>RAGLEC - Sistema de Consulta Inteligente</title>
     <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="container">
@@ -15,19 +16,23 @@
         
         <main>
             <div class="query-section">
-                <h2>Realiza tu consulta</h2>
-                <textarea id="query-input" placeholder="Escribe tu pregunta aquí..."></textarea>
-                <button id="send-button">Consultar</button>
-                <div id="loading" class="hidden">Procesando consulta...</div>
+                <h2><i class="fas fa-search"></i> Consulta Inteligente</h2>
+                <p class="instructions">Escribe tu pregunta y el sistema buscará información relevante en la base de conocimiento para brindarte una respuesta precisa.</p>
+                <textarea id="query-input" placeholder="¿Qué deseas consultar hoy?"></textarea>
+                <button id="send-button"><i class="fas fa-paper-plane"></i> Enviar consulta</button>
+                <div id="loading" class="hidden">
+                    <div class="spinner"></div>
+                    <p>Procesando consulta, por favor espera...</p>
+                </div>
             </div>
             
             <div class="response-section">
-                <h2>Respuesta</h2>
-                <div id="response-content"></div>
+                <h2><i class="fas fa-robot"></i> Respuesta</h2>
+                <div id="response-content" class="response-placeholder">Aquí aparecerá la respuesta a tu consulta</div>
                 
                 <div class="sources-section">
-                    <h3>Fuentes</h3>
-                    <div id="sources-content"></div>
+                    <h3><i class="fas fa-book"></i> Fuentes</h3>
+                    <div id="sources-content" class="sources-placeholder">Las fuentes utilizadas se mostrarán aquí</div>
                 </div>
             </div>
         </main>
