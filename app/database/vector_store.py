@@ -5,6 +5,7 @@ Este módulo proporciona funciones para gestionar documentos y embeddings en la 
 
 import logging
 from typing import List, Dict, Any, Optional, Tuple
+import json  # Importando json para deserializar metadatos
 
 from langchain.schema import Document
 
@@ -67,6 +68,14 @@ class VectorDatabase:
                 content = item.get("content", "")
                 metadata = item.get("metadata", {})
                 similarity = item.get("similarity", 0.0)
+                
+                # Convertir metadatos a diccionario si son una cadena JSON
+                if isinstance(metadata, str):
+                    try:
+                        metadata = json.loads(metadata)
+                    except json.JSONDecodeError:
+                        logger.warning(f"Error al deserializar metadatos: {metadata}")
+                        metadata = {}  # Si hay error, usar un diccionario vacío
                 
                 # Crear el documento
                 doc = Document(page_content=content, metadata=metadata)
